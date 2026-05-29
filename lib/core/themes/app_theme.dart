@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mediezy/core/style/app_button_styles.dart';
+import 'package:mediezy/core/style/app_input_styles.dart';
 import 'package:mediezy/core/themes/app_colors.dart';
 
 class AppTheme {
@@ -7,6 +9,11 @@ class AppTheme {
     brightness: Brightness.light,
     primaryColor: AppColors.lightPrimary,
     scaffoldBackgroundColor: AppColors.lightBackground,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: AppButtonStyles.elevatedButton,
+    ),
+    textButtonTheme: TextButtonThemeData(style: AppButtonStyles.textButton),
+    inputDecorationTheme: AppInputStyles.lightInputDecorationTheme,
   );
 
   //-------------------Dark Theme--------------------------
@@ -14,5 +21,12 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: AppColors.darkPrimary,
     scaffoldBackgroundColor: AppColors.darkBackground,
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: AppButtonStyles.elevatedButton,
+    ),
+    textButtonTheme: TextButtonThemeData(style: AppButtonStyles.textButton),
+
+    inputDecorationTheme: AppInputStyles.darkInputDecorationTheme,
   );
 }

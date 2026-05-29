@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const Color primary = Color(0xFF03624C);
+  static const Color secondary = Color(0xFF042222);
   // ================= LIGHT THEME =================
 
-  static const Color lightPrimary = Color(0xFF03624C);
-  static const Color lightSecondary = Color(0xFF042222);
+  static const Color lightPrimary = primary;
+  static const Color lightSecondary = secondary;
 
   static const Color lightBackground = Color(0xFFF5F5F5);
 
   static const Color lightText = Color(0xFF111111);
   static const Color lightHintText = Color(0xFF7A7A7A);
+  static const Color lightBorder = Color(0xFFE5E7EB);
 
   // ================= DARK THEME =================
 
-  static const Color darkPrimary = Color(0xFF03624C);
-  static const Color darkSecondary = Color(0xFF042222);
+  static const Color darkPrimary = primary;
+  static const Color darkSecondary = secondary;
 
   static const Color darkBackground = Color(0xFF0F0F0F);
+  static const Color darkSurface = Color(0xFF18181F);
 
   static const Color darkText = Colors.white;
   static const Color darkHintText = Colors.grey;
+  static const Color darkBorder = Color(0xFF2C2C36);
 
   // ================= COMMON =================
 
@@ -36,9 +41,6 @@ class AppColors {
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
-    colors: [
-      Color(0xFF042222),
-      Color(0xFF03624C),
-    ],
+    colors: [Color(0xFF042222), Color(0xFF03624C)],
   );
 }

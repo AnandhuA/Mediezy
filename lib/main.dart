@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mediezy/core/themes/app_theme.dart';
+import 'package:mediezy/features/splash/view/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      home: SizedBox(),
+      themeMode: ThemeMode.light,
+      home: SplashScreen(),
     );
   }
 }
