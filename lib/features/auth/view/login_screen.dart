@@ -7,9 +7,11 @@ import 'package:mediezy/core/themes/app_colors.dart';
 import 'package:mediezy/core/themes/theme_extensions.dart';
 import 'package:mediezy/core/utils/validators.dart';
 import 'package:mediezy/core/widgets/app_scaffold.dart';
+import 'package:mediezy/core/widgets/app_snackbar.dart';
 import 'package:mediezy/features/auth/view/create_account_screen.dart';
 import 'package:mediezy/features/auth/view_model/auth_provider.dart';
 import 'package:mediezy/features/auth/widgets/login_textfeild.dart';
+import 'package:mediezy/features/dashboard/view/dashboard_screen.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,7 +24,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final _usernameController = TextEditingController();
+  final _numberController = TextEditingController();
 
   final _passwordController = TextEditingController();
 
@@ -30,9 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     super.dispose();
 
-    _usernameController.dispose();
+    _numberController.dispose();
     _passwordController.dispose();
-
   }
 
   @override
@@ -50,10 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
             //=== USER NAME FEILD =================
             LoginTextfeild(
-              hitText: "Username",
-              controller: _usernameController,
-              validator: (value) =>
-                  AppValidator.isRequired(value, fieldName: "Username"),
+              hitText: "Mobile number",
+              keyboardType: TextInputType.phone,
+              controller: _numberController,
+              validator: AppValidator.phone,
             ),
             SizedBox(height: context.res.hsm),
 
@@ -68,16 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
             //=== LOGIN BUTTON ============
             ElevatedButton(
-              onPressed: authProvider.isLoading
-                  ? null
-                  : () async {
-                      if (_formKey.currentState!.validate()) {
-                        await context.read<AuthProvider>().login(
-                          username: _usernameController.text.trim(),
-                          password: _passwordController.text.trim(),
-                        );
-                      }
-                    },
+              onPressed: authProvider.isLoading ? null : loginOnTap,
               child: authProvider.isLoading
                   ? SpinKitThreeBounce(color: AppColors.white, size: 16)
                   : Text("Login", style: AppTextStyles.labelLarge),
@@ -111,5 +103,29 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> loginOnTap() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final authProvider = context.read<AuthProvider>();
+
+    final success = await authProvider.login(
+      mobileNumber: _numberController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+
+    if (!mounted) return;
+
+    if (success) {
+      AppSnackBar.success(context, "Login successful");
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const DashboardScreen()),
+      );
+    } else {
+      AppSnackBar.error(context, authProvider.errorMessage ?? "Login failed");
+    }
   }
 }

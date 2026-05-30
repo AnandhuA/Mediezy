@@ -6,9 +6,11 @@ class CreateAccountTextfeild extends StatelessWidget {
   final String? hitText;
   final int maxLines;
   final bool isPasswordFeild;
+    final bool readOnly;
   final TextInputType keyboardType;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+    final VoidCallback? onTap;
   const CreateAccountTextfeild({
     super.key,
     required this.title,
@@ -16,7 +18,9 @@ class CreateAccountTextfeild extends StatelessWidget {
     this.maxLines = 1,
     this.keyboardType = TextInputType.text,
     this.isPasswordFeild = false,
+        this.readOnly = false,
     this.controller,
+        this.onTap,
     this.validator,
   });
 
@@ -35,6 +39,8 @@ class CreateAccountTextfeild extends StatelessWidget {
           validator: validator,
           keyboardType: keyboardType,
           obscureText: isPasswordFeild,
+          readOnly: readOnly,
+            onTap: onTap,
           maxLines: maxLines,
           decoration: InputDecoration(hintText: hitText ?? "Enter $title"),
         ),
