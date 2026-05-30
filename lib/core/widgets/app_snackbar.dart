@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mediezy/core/themes/app_colors.dart';
 import 'package:mediezy/core/themes/theme_extensions.dart';
 
+
+
 class AppSnackBar {
   AppSnackBar._(); // private constructor
 

@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+
 import '../themes/app_colors.dart';
 
 class AppButtonStyles {
   static final elevatedButton = ElevatedButton.styleFrom(
     backgroundColor: AppColors.primary,
     foregroundColor: Colors.white,
-    
+
     elevation: 0,
-    padding: const EdgeInsets.symmetric(vertical: 18),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+    disabledBackgroundColor: AppColors.boderColor,
+    padding: const EdgeInsets.symmetric(vertical: 12),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
   );
 
   static final textButton = TextButton.styleFrom(
-    foregroundColor: AppColors.primary,
-    padding: const EdgeInsets.symmetric(vertical: 18),
+    foregroundColor: AppColors.secondary,
+    padding: const EdgeInsets.symmetric(vertical: 12),
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(14),
-      side: const BorderSide(color: AppColors.primary, width: 1.5),
+      borderRadius: BorderRadius.circular(32),
+      side: const BorderSide(color: AppColors.secondary, width: 2),
     ),
   );
 }

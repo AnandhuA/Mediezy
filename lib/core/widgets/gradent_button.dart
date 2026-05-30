@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mediezy/core/style/app_text_styles.dart';
 
 import '../themes/app_colors.dart';
@@ -10,13 +11,15 @@ class GradientButton extends StatelessWidget {
   final double radius;
   final double? width;
   final Widget? child;
+  final bool isLoading;
 
   const GradientButton({
     super.key,
     required this.title,
     required this.onTap,
-    this.height = 40,
-    this.radius = 20,
+    this.height = 45,
+    this.radius = 30,
+    this.isLoading = false,
     this.width,
     this.child,
   });
@@ -34,14 +37,15 @@ class GradientButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius),
         ),
         child: Center(
-          child:
-              child ??
-              Text(
-                title,
-                style: AppTextStyles.labelLarge.copyWith(
-                  color: AppColors.whiteText,
-                ),
-              ),
+          child: isLoading
+              ? SpinKitThreeBounce(color: Colors.white, size: 16)
+              : child ??
+                    Text(
+                      title,
+                      style: AppTextStyles.labelLarge.copyWith(
+                        color: AppColors.whiteText,
+                      ),
+                    ),
         ),
       ),
     );

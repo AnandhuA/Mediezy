@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mediezy/core/themes/app_theme.dart';
+import 'package:mediezy/features/auth/view/login_screen.dart';
 import 'package:mediezy/features/splash/view/splash_screen.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
-      home: SplashScreen(),
+      home: LoginScreen(),
     );
   }
 }

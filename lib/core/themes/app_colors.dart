@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const Color primary = Color(0xFF03624C);
   static const Color secondary = Color(0xFF042222);
+
+  static const Color boderColor = Color(0xFF828282);
   // ================= LIGHT THEME =================
 
   static const Color lightPrimary = primary;
   static const Color lightSecondary = secondary;
 
-  static const Color lightBackground = Color(0xFFF5F5F5);
+  static const Color lightBackground = Color(0xFFF1F7F7);
 
   static const Color lightText = Color(0xFF111111);
   static const Color lightHintText = Color(0xFF7A7A7A);
@@ -31,10 +33,17 @@ class AppColors {
   static const Color whiteText = Colors.white;
   static const Color blackText = Colors.black;
 
+    static const Color white = Colors.white;
+
   static const Color border = Color(0xFFD9D9D9);
 
   static const Color success = Color(0xFF2E7D32);
   static const Color error = Color(0xFFD32F2F);
+
+
+  static const Color approved = Colors.green;
+  static const Color pending = Colors.orange;
+  static const Color rejected = Colors.red;
 
   // ================= GRADIENT =================
 

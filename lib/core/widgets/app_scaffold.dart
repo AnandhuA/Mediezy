@@ -4,6 +4,7 @@ import 'package:mediezy/core/themes/theme_extensions.dart';
 class AppScaffold extends StatelessWidget {
   final Widget child;
   final bool scrollable;
+  final bool bottomInset;
   final EdgeInsetsGeometry? padding;
   final PreferredSizeWidget? appBar;
   final Widget? floatingActionButton;
@@ -12,6 +13,7 @@ class AppScaffold extends StatelessWidget {
     super.key,
     required this.child,
     this.scrollable = false,
+    this.bottomInset = false,
     this.padding,
     this.appBar,
     this.floatingActionButton,
@@ -29,7 +31,7 @@ class AppScaffold extends StatelessWidget {
       backgroundColor: context.background,
       appBar: appBar,
       floatingActionButton: floatingActionButton,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: bottomInset,
 
       body: SafeArea(
         child: scrollable ? SingleChildScrollView(child: content) : content,
