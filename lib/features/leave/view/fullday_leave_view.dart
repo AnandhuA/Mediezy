@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:mediezy/core/style/app_text_styles.dart';
 import 'package:mediezy/core/themes/app_colors.dart';
+import 'package:mediezy/features/leave/view_model/leave_provider.dart';
 import 'package:mediezy/features/leave/widgets/date_feild_widget.dart';
+import 'package:mediezy/features/leave/widgets/pick_date.dart';
+import 'package:provider/provider.dart';
 
-class FullDayLeaveView extends StatelessWidget {
+class FullDayLeaveView extends StatefulWidget {
   const FullDayLeaveView({super.key});
+
+  @override
+  State<FullDayLeaveView> createState() => _FullDayLeaveViewState();
+}
+
+class _FullDayLeaveViewState extends State<FullDayLeaveView> {
+  final fromDateController = TextEditingController();
+
+  final toDateController = TextEditingController();
+
+  @override
+  void dispose() {
+    fromDateController.dispose();
+    toDateController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +46,38 @@ class FullDayLeaveView extends StatelessWidget {
           children: [
             const Text("From", style: AppTextStyles.titleMedium),
             const SizedBox(height: 8),
-            DateField(hintText: "DD/MM/YYYY", onTap: () {}),
+            DateField(
+              controller: fromDateController,
+              hintText: "YYYY/MM/DD",
+              onTap: () async {
+                await pickDate(
+                  context: context,
+                  controller: fromDateController,
+                );
+                if (context.mounted) {
+                  context.read<LeaveProvider>().setStartDate(
+                    fromDateController.text,
+                  );
+                }
+              },
+            ),
 
             const SizedBox(height: 16),
 
             const Text("To", style: AppTextStyles.titleMedium),
             const SizedBox(height: 8),
-            DateField(hintText: "DD/MM/YYYY", onTap: () {}),
+            DateField(
+              controller: toDateController,
+              hintText: "YYYY/MM/DD",
+              onTap: () async {
+                await pickDate(context: context, controller: toDateController);
+                if (context.mounted) {
+                  context.read<LeaveProvider>().setEndDate(
+                    toDateController.text,
+                  );
+                }
+              },
+            ),
 
             const SizedBox(height: 16),
 
@@ -41,6 +85,9 @@ class FullDayLeaveView extends StatelessWidget {
             const SizedBox(height: 8),
             TextFormField(
               maxLines: 4,
+              onChanged: (value) {
+                context.read<LeaveProvider>().setReason(value);
+              },
               decoration: InputDecoration(
                 hintText: "Enter Leave reason",
                 border: OutlineInputBorder(
@@ -64,7 +111,11 @@ class FullDayLeaveView extends StatelessWidget {
                 DropdownMenuItem(value: "Casual", child: Text("Casual")),
                 DropdownMenuItem(value: "Sick", child: Text("Sick")),
               ],
-              onChanged: (value) {},
+              onChanged: (value) {
+                if (value != null) {
+                  context.read<LeaveProvider>().setLeaveType(value);
+                }
+              },
             ),
           ],
         ),

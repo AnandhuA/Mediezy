@@ -4,9 +4,15 @@ import 'package:mediezy/core/themes/app_colors.dart';
 
 class DateField extends StatelessWidget {
   final String hintText;
+  final TextEditingController? controller;
   final VoidCallback onTap;
 
-  const DateField({super.key, required this.hintText, required this.onTap});
+  const DateField({
+    super.key,
+    required this.hintText,
+    required this.onTap,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +21,8 @@ class DateField extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: IgnorePointer(
         child: TextFormField(
+          controller: controller,
+          readOnly: true,
           decoration: InputDecoration(
             hintText: hintText,
             suffixIcon: Image.asset(AppAssets.calendarColorIcon, scale: 3),

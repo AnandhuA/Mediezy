@@ -5,7 +5,6 @@ import 'package:mediezy/core/responsive/responsive.dart';
 import 'package:mediezy/core/style/app_text_styles.dart';
 import 'package:mediezy/core/themes/app_colors.dart';
 import 'package:mediezy/core/themes/theme_extensions.dart';
-import 'package:mediezy/core/utils/permission_helper.dart';
 import 'package:mediezy/core/widgets/app_snackbar.dart';
 import 'package:mediezy/features/attendance/view_model/attendance_provider.dart';
 import 'package:provider/provider.dart';

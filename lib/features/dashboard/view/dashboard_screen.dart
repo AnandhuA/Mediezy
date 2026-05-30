@@ -30,8 +30,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<DashboardProvider>().init(context);
-       context.read<AttendanceProvider>()
-      .getAttendanceStatus();
+      context.read<AttendanceProvider>().getAttendanceStatus();
     });
   }
 

@@ -45,4 +45,23 @@ class AttendanceService {
       throw ApiException(ErrorHandler.extractErrorMessage(e.response?.data));
     }
   }
+
+  Future<void> getRouteList() async {
+    try {
+      final response = await dio.get(ApiEndpoints.attendanceRouteList);
+
+      log("$response");
+
+      // final List routes =
+      //     response.data["routes"] ?? [];
+
+      // return routes
+      //     .map(
+      //       (e) => RouteModel.fromJson(e),
+      //     )
+      //     .toList();
+    } on DioException catch (e) {
+      throw ApiException(ErrorHandler.extractErrorMessage(e.response?.data));
+    }
+  }
 }

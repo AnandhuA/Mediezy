@@ -6,6 +6,7 @@ import 'package:mediezy/features/attendance/view_model/attendance_provider.dart'
 import 'package:mediezy/features/auth/view/login_screen.dart';
 import 'package:mediezy/features/auth/view_model/auth_provider.dart';
 import 'package:mediezy/features/dashboard/view_model/dashboard_provider.dart';
+import 'package:mediezy/features/leave/view_model/leave_provider.dart';
 import 'package:mediezy/features/splash/view/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
-         ChangeNotifierProvider(create: (_) => AttendanceProvider()),
+        ChangeNotifierProvider(create: (_) => AttendanceProvider()),
+        ChangeNotifierProvider(create: (_) => LeaveProvider()),
       ],
 
       child: MaterialApp(
@@ -33,11 +35,8 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.light,
-        navigatorKey:
-      NavigationService.navigatorKey,
-      routes: {
-  "/login": (_) => const LoginScreen(),
-},
+        navigatorKey: NavigationService.navigatorKey,
+        routes: {"/login": (_) => const LoginScreen()},
         home: SplashScreen(),
       ),
     );

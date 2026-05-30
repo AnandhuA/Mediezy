@@ -4,11 +4,13 @@ import 'package:mediezy/core/responsive/responsive.dart';
 import 'package:mediezy/core/style/app_text_styles.dart';
 import 'package:mediezy/core/themes/app_colors.dart';
 import 'package:mediezy/core/widgets/app_scaffold.dart';
+import 'package:mediezy/core/widgets/app_snackbar.dart';
 import 'package:mediezy/core/widgets/gradent_button.dart';
 import 'package:mediezy/features/leave/view/fullday_leave_view.dart';
 import 'package:mediezy/features/leave/view/halfday_leave_view.dart';
 import 'package:mediezy/features/leave/view/leave_list_screen.dart';
-
+import 'package:mediezy/features/leave/view_model/leave_provider.dart';
+import 'package:provider/provider.dart';
 
 class ApplyLeaveScreen extends StatelessWidget {
   const ApplyLeaveScreen({super.key});
@@ -42,7 +44,7 @@ class ApplyLeaveScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.secondary.withValues( alpha:  0.08),
+                    color: AppColors.secondary.withValues(alpha: 0.08),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -72,7 +74,44 @@ class ApplyLeaveScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: context.res.hmd),
-            GradientButton(title: "Apply", onTap: () {}),
+            Builder(
+              builder: (tabContext) {
+                return Consumer<LeaveProvider>(
+                  builder: (_, provider, _) {
+                    return GradientButton(
+                      isLoading: provider.isLoading,
+                      title: "Apply",
+                      onTap: () async {
+                        final leaveMode =
+                            DefaultTabController.of(tabContext).index == 0
+                            ? "full_day"
+                            : "half_day";
+                
+                        final success = await provider.applyLeave(
+                          leaveMode: leaveMode,
+                        );
+                
+                        if (!context.mounted) return;
+                
+                        if (success) {
+                          AppSnackBar.success(
+                            context,
+                            "Leave applied successfully",
+                          );
+                
+                          Navigator.pop(context);
+                        } else {
+                          AppSnackBar.error(
+                            context,
+                            provider.errorMessage ?? "Failed to apply leave",
+                          );
+                        }
+                      },
+                    );
+                  },
+                );
+              }
+            ),
             SizedBox(height: context.res.hxs),
             TextButton(
               onPressed: () {
